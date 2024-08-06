@@ -1,17 +1,21 @@
 import './globals.css'
 
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { Inter } from 'next/font/google'
 
-const poppins = Poppins({
+import RootProvider from '@/app/components/root-provider'
+
+const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
-  variable: '--font-poppins',
+  variable: '--font-inter',
 })
 
 export const metadata: Metadata = {
-  title: 'FSW Barber',
-  description: '',
+  title: {
+    template: '%s | FSW Barber',
+    default: 'FSW Barber',
+  },
 }
 
 export default function RootLayout({
@@ -20,8 +24,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR" className={poppins.variable}>
-      <body className="dark antialiased">{children}</body>
+    <html lang="pt-BR" className={inter.variable}>
+      <body className="dark antialiased">
+        <RootProvider>{children}</RootProvider>
+      </body>
     </html>
   )
 }
