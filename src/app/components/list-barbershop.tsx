@@ -21,7 +21,7 @@ const ListBarberShop = () => {
     )
 
   return (
-    <div className="flex gap-4 overflow-x-scroll">
+    <div className="flex gap-4 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
       {data?.map((barber) => <BabershopItem key={barber.id} barber={barber} />)}
     </div>
   )

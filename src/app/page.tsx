@@ -10,6 +10,8 @@ import { Button } from '@/app/components/ui/button'
 import { Card, CardContent } from '@/app/components/ui/card'
 import { Input } from '@/app/components/ui/input'
 
+import Footer from './components/footer'
+
 export const metadata: Metadata = {
   title: 'Home',
 }
@@ -67,9 +69,17 @@ export default function Home() {
             </div>
           </CardContent>
         </Card>
+        <h3 className="mt-6 text-sm font-bold text-muted-foreground">
+          Recomentados
+        </h3>
+        <ListBarberShop />
 
+        <h2 className="mt-6 text-sm font-bold text-muted-foreground">
+          Populares
+        </h2>
         <ListBarberShop />
       </div>
+      <Footer />
     </div>
   )
 }
