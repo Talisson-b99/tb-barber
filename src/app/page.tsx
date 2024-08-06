@@ -1,3 +1,5 @@
+import Header from '@/components/header'
+
 export default function Home() {
-  return <h2>talisson barbosa</h2>
+  return <Header />
 }
