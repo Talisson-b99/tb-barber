@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={poppins.variable}>
-      <body className="dark">{children}</body>
+      <body className="dark antialiased">{children}</body>
     </html>
   )
 }
