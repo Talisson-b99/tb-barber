@@ -4,12 +4,11 @@ import Image from 'next/image'
 
 import Header from '@/app/components/header'
 import ListBarberShop from '@/app/components/list-barbershop'
-import { Avatar, AvatarImage } from '@/app/components/ui/avatar'
-import { Badge } from '@/app/components/ui/badge'
 import { Button } from '@/app/components/ui/button'
-import { Card, CardContent } from '@/app/components/ui/card'
 import { Input } from '@/app/components/ui/input'
 
+import { quickSearchOptions } from './_constants/search'
+import BookingItem from './components/booking-item'
 import Footer from './components/footer'
 
 export const metadata: Metadata = {
@@ -36,30 +35,17 @@ export default function Home() {
         </div>
 
         <div className="flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
-          <Button className="gap-2" variant={'secondary'}>
-            <Image src={'/cabelo.svg'} height={16} width={16} alt="" />
-            Cabelo
-          </Button>
-
-          <Button className="gap-2" variant={'secondary'}>
-            <Image src={'/barba.svg'} height={16} width={16} alt="" />
-            Barba
-          </Button>
-
-          <Button className="gap-2" variant={'secondary'}>
-            <Image src={'/acabamento.svg'} height={16} width={16} alt="" />
-            Acabamento
-          </Button>
-
-          <Button className="gap-2" variant={'secondary'}>
-            <Image src={'/sobrancelha.svg'} height={16} width={16} alt="" />
-            Sobrancelha
-          </Button>
-
-          <Button className="gap-2" variant={'secondary'}>
-            <Image src={'/massagem.svg'} height={16} width={16} alt="" />
-            Massagem
-          </Button>
+          {quickSearchOptions.map((item) => (
+            <Button className="gap-2" variant={'secondary'} key={item.title}>
+              <Image
+                src={item.imageUrl}
+                height={16}
+                width={16}
+                alt={item.title}
+              />
+              {item.title}
+            </Button>
+          ))}
         </div>
 
         <div className="relative mt-6 h-36 w-full">
@@ -71,31 +57,8 @@ export default function Home() {
           />
         </div>
 
-        <h2 className="mt-6 text-sm font-bold text-muted-foreground">
-          Agendamentos
-        </h2>
+        <BookingItem />
 
-        <Card className="mt-3">
-          <CardContent className="flex justify-between p-0">
-            <div className="flex-1 p-3">
-              <Badge className="text-bold bg-[#221C3D] text-xs text-[#8162FF]">
-                Confirmado
-              </Badge>
-              <h3 className="mb-2 mt-3 font-bold">Corte de Cabelo</h3>
-              <div className="flex gap-2">
-                <Avatar className="size-6">
-                  <AvatarImage src="/avatar.png" />
-                </Avatar>
-                <span className="text-sm">Vintage Barber</span>
-              </div>
-            </div>
-            <div className="flex flex-col items-center justify-center border-l-2 px-5 text-center">
-              <p className="text-xs">Fevereiro</p>
-              <p className="text-xl">06</p>
-              <p className="text-xs">09:45</p>
-            </div>
-          </CardContent>
-        </Card>
         <h3 className="mb-3 mt-6 text-sm font-bold text-muted-foreground">
           Recomentados
         </h3>
