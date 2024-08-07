@@ -12,7 +12,7 @@ interface BabershopItemProsp {
 
 const BabershopItem = ({ barber }: BabershopItemProsp) => {
   return (
-    <Card className="mt-6 h-fit min-w-[167px] rounded-2xl">
+    <Card className="h-fit min-w-[167px] rounded-2xl">
       <CardContent className="p-0">
         <div className="relative h-[160px] w-full">
           <Badge className="absolute left-2 top-2 z-10 flex items-center gap-px bg-[#221C3D]/70 py-1 text-xs font-bold">

@@ -7,12 +7,12 @@ import { Separator } from './ui/separator'
 const Header = () => {
   return (
     <header>
-      <div className="flex justify-between px-5 py-8">
+      <div className="flex items-center justify-between px-5 py-3">
         <Image
           src={'/logo.png'}
-          width={130}
-          height={18}
-          alt="fsw barber"
+          width={40}
+          height={40}
+          alt="barbershop"
           quality={100}
         />
         <Button variant={'outline'} size={'icon'}>

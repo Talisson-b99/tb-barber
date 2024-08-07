@@ -35,7 +35,34 @@ export default function Home() {
           </Button>
         </div>
 
-        <div className="relative h-36 w-full">
+        <div className="flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
+          <Button className="gap-2" variant={'secondary'}>
+            <Image src={'/cabelo.svg'} height={16} width={16} alt="" />
+            Cabelo
+          </Button>
+
+          <Button className="gap-2" variant={'secondary'}>
+            <Image src={'/barba.svg'} height={16} width={16} alt="" />
+            Barba
+          </Button>
+
+          <Button className="gap-2" variant={'secondary'}>
+            <Image src={'/acabamento.svg'} height={16} width={16} alt="" />
+            Acabamento
+          </Button>
+
+          <Button className="gap-2" variant={'secondary'}>
+            <Image src={'/sobrancelha.svg'} height={16} width={16} alt="" />
+            Sobrancelha
+          </Button>
+
+          <Button className="gap-2" variant={'secondary'}>
+            <Image src={'/massagem.svg'} height={16} width={16} alt="" />
+            Massagem
+          </Button>
+        </div>
+
+        <div className="relative mt-6 h-36 w-full">
           <Image
             src={'/banner-01.png'}
             alt="agende nos melhores"
@@ -69,12 +96,12 @@ export default function Home() {
             </div>
           </CardContent>
         </Card>
-        <h3 className="mt-6 text-sm font-bold text-muted-foreground">
+        <h3 className="mb-3 mt-6 text-sm font-bold text-muted-foreground">
           Recomentados
         </h3>
         <ListBarberShop />
 
-        <h2 className="mt-6 text-sm font-bold text-muted-foreground">
+        <h2 className="mb-3 mt-6 text-sm font-bold text-muted-foreground">
           Populares
         </h2>
         <ListBarberShop />
