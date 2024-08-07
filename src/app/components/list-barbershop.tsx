@@ -14,9 +14,9 @@ const ListBarberShop = () => {
   if (isLoading)
     return (
       <div className="flex gap-4 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
-        <Skeleton className="mt-6 h-[270px] min-w-[167px] rounded-2xl" />
-        <Skeleton className="mt-6 h-[270px] min-w-[167px] rounded-2xl" />
-        <Skeleton className="mt-6 h-[270px] min-w-[167px] rounded-2xl" />
+        <Skeleton className="mt-6 h-[255px] min-w-[167px] rounded-2xl" />
+        <Skeleton className="mt-6 h-[255px] min-w-[167px] rounded-2xl" />
+        <Skeleton className="mt-6 h-[255px] min-w-[167px] rounded-2xl" />
       </div>
     )
 

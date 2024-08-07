@@ -9,7 +9,6 @@ import { Input } from '@/app/components/ui/input'
 
 import { quickSearchOptions } from './_constants/search'
 import BookingItem from './components/booking-item'
-import Footer from './components/footer'
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -69,7 +68,6 @@ export default function Home() {
         </h2>
         <ListBarberShop />
       </div>
-      <Footer />
     </div>
   )
 }
