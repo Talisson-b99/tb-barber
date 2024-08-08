@@ -85,6 +85,7 @@ async function seedDatabase() {
         name: 'Massagem',
         description: 'Relaxe com uma massagem revigorante.',
         price: 50.0,
+
         imageUrl: 'https://fsw-barber.s3.amazonaws.com/servicos/massagem.png',
       },
       {

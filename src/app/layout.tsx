@@ -6,6 +6,7 @@ import { Inter } from 'next/font/google'
 import RootProvider from '@/app/components/root-provider'
 
 import Footer from './components/footer'
+import { Toaster } from './components/ui/sonner'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -29,6 +30,7 @@ export default function RootLayout({
     <html lang="pt-BR" className={inter.variable}>
       <body className="dark antialiased">
         <RootProvider>
+          <Toaster richColors />
           {children}
           <Footer />
         </RootProvider>

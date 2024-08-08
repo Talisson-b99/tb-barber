@@ -1,7 +1,6 @@
-import { MenuIcon } from 'lucide-react'
 import Image from 'next/image'
 
-import { Button } from './ui/button'
+import Menu from './menu'
 import { Separator } from './ui/separator'
 
 const Header = () => {
@@ -15,9 +14,8 @@ const Header = () => {
           alt="barbershop"
           quality={100}
         />
-        <Button variant={'outline'} size={'icon'}>
-          <MenuIcon />
-        </Button>
+
+        <Menu />
       </div>
       <Separator />
     </header>

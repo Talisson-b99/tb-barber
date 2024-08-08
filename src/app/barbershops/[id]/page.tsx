@@ -1,11 +1,13 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { ArrowLeft, MapPin, MenuIcon, Smartphone, Star } from 'lucide-react'
+import { ArrowLeft, MapPin, Smartphone, Star } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { toast } from 'sonner'
 
 import { getBarber } from '@/app/actions/get-barber'
+import Menu from '@/app/components/menu'
 import { Button } from '@/app/components/ui/button'
 import { Skeleton } from '@/app/components/ui/skeleton'
 
@@ -22,6 +24,11 @@ const BarbershopPage = ({ params }: BarbershopPage) => {
     queryKey: ['barber', params.id],
     queryFn: () => getBarber(params.id),
   })
+
+  const handleCopyPhone = (phone: string) => {
+    navigator.clipboard.writeText(phone)
+    toast.success('Telefone copiado com sucesso!')
+  }
 
   if (!data)
     return (
@@ -77,14 +84,9 @@ const BarbershopPage = ({ params }: BarbershopPage) => {
             <ArrowLeft />
           </Button>
         </Link>
-
-        <Button
-          className="absolute right-4 top-4"
-          variant={'outline'}
-          size={'icon'}
-        >
-          <MenuIcon />
-        </Button>
+        <div className="absolute right-4 top-4">
+          <Menu />
+        </div>
       </div>
 
       <div className="border-b px-5 pb-6 pt-3">
@@ -125,7 +127,12 @@ const BarbershopPage = ({ params }: BarbershopPage) => {
             <div className="flex items-center gap-2" key={i}>
               <Smartphone size={16} />
               <span>{phone}</span>
-              <Button variant={'outline'} className="ml-auto" size={'sm'}>
+              <Button
+                variant={'outline'}
+                className="ml-auto"
+                size={'sm'}
+                onClick={() => handleCopyPhone(phone)}
+              >
                 Copiar
               </Button>
             </div>
