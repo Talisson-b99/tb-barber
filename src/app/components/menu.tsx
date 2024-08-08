@@ -1,3 +1,5 @@
+'use client'
+import { SignInButton, SignOutButton, useUser } from '@clerk/nextjs'
 import { Calendar, HomeIcon, LogIn, LogOut, MenuIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -5,6 +7,7 @@ import Link from 'next/link'
 import { quickSearchOptions } from '../_constants/search'
 import { Avatar, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
+import { Dialog, DialogContent, DialogTrigger } from './ui/dialog'
 import {
   Sheet,
   SheetContent,
@@ -15,7 +18,8 @@ import {
 } from './ui/sheet'
 
 const Menu = () => {
-  const account = false
+  const { user } = useUser()
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -28,25 +32,48 @@ const Menu = () => {
         <SheetHeader>
           <SheetTitle className="text-left">Menu</SheetTitle>
           <div className="flex items-center border-b py-6">
-            {account ? (
+            {user ? (
               <div className="flex gap-2">
                 <Avatar>
-                  <AvatarImage
-                    src={'https://github.com/talisson-b99.png'}
-                    alt="avatar"
-                  />
+                  <AvatarImage src={user.imageUrl} alt="avatar" />
                 </Avatar>
                 <div className="flex flex-col">
-                  <p className="text-left font-bold">Talisson Barbosa</p>
-                  <p className="text-xs">talissonbarbosa@gmail.com</p>
+                  <p className="text-left font-bold">{user.fullName}</p>
+                  <p className="text-xs">
+                    {user?.emailAddresses[0].emailAddress}
+                  </p>
                 </div>
               </div>
             ) : (
               <div className="flex w-full items-center justify-between">
                 <h3 className="text-lg font-bold">Olá. Faça seu login!</h3>
-                <Button size={'icon'}>
-                  <LogIn size={16} />
-                </Button>
+                <Dialog>
+                  <DialogTrigger>
+                    <Button size={'icon'}>
+                      <LogIn size={16} />
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="flex w-[90%] flex-col items-center rounded-lg">
+                    <span className="font-bold">Faça login na plataforma</span>
+                    <span className="text-sm text-muted-foreground">
+                      Conecte-se usando sua conta do Google
+                    </span>
+                    <SignInButton>
+                      <Button
+                        className="flex w-full items-center gap-2 font-bold"
+                        variant={'outline'}
+                      >
+                        <Image
+                          src={'/google.svg'}
+                          width={16}
+                          height={16}
+                          alt={'Google'}
+                        />
+                        Google
+                      </Button>
+                    </SignInButton>
+                  </DialogContent>
+                </Dialog>
               </div>
             )}
           </div>
@@ -94,16 +121,12 @@ const Menu = () => {
           ))}
         </div>
         <SheetFooter className="py-4">
-          <Button
-            asChild
-            className="w-full justify-start gap-2"
-            variant={'ghost'}
-          >
-            <Link href={'/'}>
+          <SignOutButton>
+            <Button className="w-full justify-start gap-2" variant={'ghost'}>
               <LogOut size={16} />
               Sair da conta
-            </Link>
-          </Button>
+            </Button>
+          </SignOutButton>
         </SheetFooter>
       </SheetContent>
     </Sheet>

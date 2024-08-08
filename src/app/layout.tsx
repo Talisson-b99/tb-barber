@@ -1,5 +1,6 @@
 import './globals.css'
 
+import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
@@ -30,9 +31,11 @@ export default function RootLayout({
     <html lang="pt-BR" className={inter.variable}>
       <body className="dark antialiased">
         <RootProvider>
-          <Toaster richColors />
-          {children}
-          <Footer />
+          <ClerkProvider>
+            <Toaster richColors />
+            {children}
+            <Footer />
+          </ClerkProvider>
         </RootProvider>
       </body>
     </html>
