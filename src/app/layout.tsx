@@ -33,8 +33,12 @@ export default function RootLayout({
         <RootProvider>
           <ClerkProvider>
             <Toaster richColors />
-            {children}
-            <Footer />
+            <div className="flex h-screen flex-col">
+              <div className="flex-1">{children}</div>
+              <div className="">
+                <Footer />
+              </div>
+            </div>
           </ClerkProvider>
         </RootProvider>
       </body>

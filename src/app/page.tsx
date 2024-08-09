@@ -1,14 +1,14 @@
-import { Search } from 'lucide-react'
 import { Metadata } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 
-import Header from '@/app/components/header'
 import ListBarberShop from '@/app/components/list-barbershop'
 import { Button } from '@/app/components/ui/button'
-import { Input } from '@/app/components/ui/input'
 
 import { quickSearchOptions } from './_constants/search'
 import BookingItem from './components/booking-item'
+import Header from './components/header'
+import SearchInput from './components/search-input'
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -24,25 +24,29 @@ export default function Home() {
         </h2>
         <span className="text-sm">Sexta, 2 de Fevereiro</span>
         <div className="my-6 flex items-center gap-2">
-          <Input
-            className="flex-1 border px-3 py-2 shadow-sm outline-none focus-within:ring-violet-100 focus-within:transition-colors focus-within:duration-200 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder-zinc-400 dark:focus:border-violet-500 dark:focus:ring-violet-500/20"
-            placeholder="Buscar..."
-          />
-          <Button size={'icon'}>
-            <Search />
-          </Button>
+          <SearchInput />
         </div>
 
         <div className="flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
           {quickSearchOptions.map((item) => (
-            <Button className="gap-2" variant={'secondary'} key={item.title}>
-              <Image
-                src={item.imageUrl}
-                height={16}
-                width={16}
-                alt={item.title}
-              />
-              {item.title}
+            <Button
+              className="gap-2"
+              variant={'secondary'}
+              key={item.title}
+              asChild
+            >
+              <Link
+                href={`/barbershops-search/search?q=${item.title}`}
+                className="flex gap-2"
+              >
+                <Image
+                  src={item.imageUrl}
+                  height={16}
+                  width={16}
+                  alt={item.title}
+                />
+                {item.title}
+              </Link>
             </Button>
           ))}
         </div>

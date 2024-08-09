@@ -24,10 +24,16 @@ const BarbershopPage = ({ params }: BarbershopPage) => {
     queryKey: ['barber', params.id],
     queryFn: () => getBarber(params.id),
   })
-
   const handleCopyPhone = (phone: string) => {
-    navigator.clipboard.writeText(phone)
-    toast.success('Telefone copiado com sucesso!')
+    navigator.clipboard
+      .writeText(phone)
+      .then(() => {
+        toast.success('Telefone copiado com sucesso!')
+      })
+      .catch((err) => {
+        console.error('Erro ao copiar o telefone: ', err)
+        toast.error('Falha ao copiar o telefone.')
+      })
   }
 
   if (!data)

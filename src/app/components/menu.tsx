@@ -3,6 +3,8 @@ import { SignInButton, SignOutButton, useUser } from '@clerk/nextjs'
 import { Calendar, HomeIcon, LogIn, LogOut, MenuIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 import { quickSearchOptions } from '../_constants/search'
 import { Avatar, AvatarImage } from './ui/avatar'
@@ -19,6 +21,13 @@ import {
 
 const Menu = () => {
   const { user } = useUser()
+  const [paramsCurrent, setParamsCurrent] = useState('')
+  const params = useSearchParams()
+  const query = params.get('q')
+
+  useEffect(() => {
+    setParamsCurrent(query || 'inicio')
+  }, [query])
 
   return (
     <Sheet>
@@ -82,7 +91,7 @@ const Menu = () => {
         <div className="border-b py-6">
           <Button
             asChild
-            className="flex w-full items-center justify-start gap-1"
+            className={`${paramsCurrent === 'inicio' ? 'bg-primary' : 'bg-transparent'} flex w-full items-center justify-start gap-1`}
           >
             <Link href={'/'}>
               <HomeIcon size={16} />
@@ -106,9 +115,9 @@ const Menu = () => {
             <Button
               key={option.title}
               asChild
-              className="flex h-11 w-full items-center justify-start gap-2 bg-transparent"
+              className={`${paramsCurrent === option.title ? 'bg-primary' : 'bg-transparent'} h-11 w-full items-center justify-start gap-2`}
             >
-              <Link href={'/'}>
+              <Link href={`/barbershops-search/search?q=${option.title}`}>
                 <Image
                   src={option.imageUrl}
                   width={16}
