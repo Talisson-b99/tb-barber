@@ -24,6 +24,7 @@ const BarbershopPage = ({ params }: BarbershopPage) => {
     queryKey: ['barber', params.id],
     queryFn: () => getBarber(params.id),
   })
+
   const handleCopyPhone = (phone: string) => {
     navigator.clipboard
       .writeText(phone)
@@ -118,7 +119,7 @@ const BarbershopPage = ({ params }: BarbershopPage) => {
         </h3>
         <div className="flex flex-col gap-3 px-5">
           {data.services.map((service) => (
-            <ServiceItem key={service.id} service={service} />
+            <ServiceItem key={service.id} barber={data} service={service} />
           ))}
         </div>
       </div>

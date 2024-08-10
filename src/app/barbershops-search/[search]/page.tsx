@@ -39,7 +39,7 @@ const BarbershopSearchPage = ({ searchParams }: BarbershopSearchPageProps) => {
   return (
     <>
       <Header />
-      <div className="px-5">
+      <div className="px-5 pb-6">
         <div className="py-6">
           <SearchInput />
         </div>
