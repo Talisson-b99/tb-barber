@@ -1,3 +1,4 @@
+import { currentUser } from '@clerk/nextjs/server'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -14,13 +15,17 @@ export const metadata: Metadata = {
   title: 'Home',
 }
 
-export default function Home() {
+export default async function Home() {
+  const user = await currentUser()
   return (
     <div>
       <Header />
       <div className="px-5 py-6">
         <h2 className="text-xl">
-          Olá, <span className="font-bold">Talisson</span>
+          Olá,{' '}
+          <span className="font-bold">
+            {user?.firstName || 'Seja bem vindo'}
+          </span>
         </h2>
         <span className="text-sm">Sexta, 2 de Fevereiro</span>
         <div className="my-6 flex items-center gap-2">

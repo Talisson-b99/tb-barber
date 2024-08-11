@@ -1,4 +1,6 @@
 import { Barbershop, BarbershopService } from '@prisma/client'
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
 import { Card, CardContent } from '@/app/components/ui/card'
 
@@ -6,9 +8,16 @@ interface InfoBookingProps {
   service: BarbershopService
   barber: Barbershop
   hourSelected: string | undefined
+  date: Date | undefined
 }
 
-const InfoBooking = ({ barber, service, hourSelected }: InfoBookingProps) => {
+const InfoBooking = ({
+  barber,
+  service,
+  hourSelected,
+  date,
+}: InfoBookingProps) => {
+  const dateFormated = format(date! || new Date(), 'dd MMMM', { locale: ptBR })
   return (
     <Card className="mt-6">
       <CardContent className="flex flex-col gap-3 p-3">
@@ -24,7 +33,7 @@ const InfoBooking = ({ barber, service, hourSelected }: InfoBookingProps) => {
 
         <div className="flex justify-between text-sm">
           <span className="text-muted-foreground">Data</span>
-          <span>06 de Agosto</span>
+          <span>{dateFormated}</span>
         </div>
 
         <div className="flex justify-between text-sm">

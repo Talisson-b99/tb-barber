@@ -15,8 +15,6 @@ interface BarbershopSearchPageProps {
 }
 
 const BarbershopSearchPage = ({ searchParams }: BarbershopSearchPageProps) => {
-  console.log(searchParams.q)
-
   const { data } = useQuery({
     queryKey: ['searchBarber', searchParams.q],
     queryFn: () => searchdBarber(searchParams.q),

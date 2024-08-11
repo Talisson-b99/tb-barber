@@ -131,13 +131,14 @@ const ServiceItem = ({ service, barber }: ServiceItemProps) => {
                   barber={barber}
                   service={service}
                   hourSelected={hoursSelected}
+                  date={date}
                 />
 
                 <div className="relative flex-1">
                   <Button
                     className="absolute bottom-6 w-full"
                     onClick={handleBooking}
-                    disabled={!hoursSelected || isPending}
+                    disabled={!date || !hoursSelected || isPending}
                   >
                     Confirmar
                   </Button>
