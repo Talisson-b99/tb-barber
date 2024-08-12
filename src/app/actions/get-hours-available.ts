@@ -1,5 +1,5 @@
 'use server'
-import { endOfDay, format, startOfDay } from 'date-fns'
+import { endOfDay, format, isFuture, startOfDay } from 'date-fns'
 
 import { db } from '../lib/prisma'
 
@@ -41,6 +41,17 @@ export async function getHoursAvailable({
   const hoursAvailable = barbershop.hoursAvailable.filter(
     (hour) => !bookedHours.includes(hour),
   )
+
+  const hoursAvailableFuturre = hoursAvailable
+    .map((hour) => {
+      const dateHour = new Date(`${format(date, 'yyyy-MM-dd')} ${hour}`)
+      if (isFuture(dateHour)) {
+        return format(dateHour, 'HH:mm')
+      }
+      return null
+    })
+    .filter((hour) => hour !== null)
+  console.log('hoursAvailableFuturre', hoursAvailableFuturre)
   console.log('hoursAvailable', hoursAvailable)
-  return hoursAvailable
+  return hoursAvailableFuturre
 }
