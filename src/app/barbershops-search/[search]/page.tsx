@@ -35,25 +35,25 @@ const BarbershopSearchPage = ({ searchParams }: BarbershopSearchPageProps) => {
   }
 
   return (
-    <>
+    <div className="">
       <Header />
-      <div className="px-5 pb-6">
-        <div className="py-6">
+      <div className="relative mx-auto px-5 pb-6 md:max-w-[1440px] md:px-3">
+        <div className="w-[50%] py-6 md:absolute md:-top-24 md:left-24">
           <SearchInput />
         </div>
-        <div>
-          <span className="mb-3 block text-xs font-bold uppercase text-muted-foreground">
+        <div className="md:pt-10">
+          <span className="mb-3 block text-xs font-bold uppercase text-muted-foreground md:mb-5 md:text-xl">
             RESULTADOS PARA &quot;{searchParams.q}&quot;
           </span>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
             {data?.map((barber) => (
               <BabershopItem key={barber.id} barber={barber} />
             ))}
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
