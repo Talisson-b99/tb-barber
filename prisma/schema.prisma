@@ -19,7 +19,8 @@ model Barbershop {
   updatedAt      DateTime            @updatedAt
   services       BarbershopService[]
   bookings       Booking[]
-  reviews        Review[]
+
+  Review Review[]
 }
 
 model BarbershopService {
@@ -50,6 +51,7 @@ model Booking {
   createdAt    DateTime          @default(now())
   updatedAt    DateTime          @updatedAt
   status       Status            @default(CONFIRMED)
+  rating       Int               @default(5)
 
   @@unique([serviceId, date, barbershopId])
 }

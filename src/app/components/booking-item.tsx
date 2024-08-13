@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { toast } from 'sonner'
 
 import { cancelBooking } from '../actions/cancel-booking'
+import StarRating from './starRating'
 import { Avatar, AvatarImage } from './ui/avatar'
 import { Badge } from './ui/badge'
 import { Button } from './ui/button'
@@ -99,7 +100,7 @@ const BookingItem = ({ booking }: BookingItemProps) => {
             </CardContent>
           </Card>
         </SheetTrigger>
-        <SheetContent className="flex h-screen flex-col px-0">
+        <SheetContent className="flex h-screen w-[80%] flex-col px-0">
           <SheetHeader>
             <SheetTitle className="border-b px-5 py-6 text-left text-lg font-bold">
               Infomarções da Reserva
@@ -216,9 +217,21 @@ const BookingItem = ({ booking }: BookingItemProps) => {
                 )}
 
                 {booking.status === 'COMPLETED' && (
-                  <Button variant="default" className="w-full">
-                    Avaliar Barbearia
-                  </Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="default" className="w-full">
+                        Avaliar Barbearia
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="flex w-[80%] flex-col items-center rounded-lg">
+                      <span className="font-bold">Avalie sua experiência</span>
+                      <span className="text-center text-sm text-muted-foreground">
+                        Toque nas estrelas para avaliar sua experiência na{' '}
+                        {booking.barber.name}
+                      </span>
+                      <StarRating bookingId={booking.id} />
+                    </DialogContent>
+                  </Dialog>
                 )}
               </div>
             </div>
