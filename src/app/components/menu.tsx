@@ -3,7 +3,7 @@ import { SignInButton, SignOutButton, useUser } from '@clerk/nextjs'
 import { Calendar, HomeIcon, LogIn, LogOut, MenuIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { quickSearchOptions } from '../_constants/search'
@@ -24,9 +24,10 @@ const Menu = () => {
   const [paramsCurrent, setParamsCurrent] = useState('')
   const params = useSearchParams()
   const query = params.get('q')
+  const path = usePathname()
 
   useEffect(() => {
-    setParamsCurrent(query || 'inicio')
+    setParamsCurrent(query!)
   }, [query])
 
   return (
@@ -91,7 +92,7 @@ const Menu = () => {
         <div className="border-b py-6">
           <Button
             asChild
-            className={`${paramsCurrent === 'inicio' ? 'bg-primary' : 'bg-transparent'} flex w-full items-center justify-start gap-1`}
+            className={`${path === '/' ? 'bg-primary' : 'bg-transparent'} flex w-full items-center justify-start gap-1`}
           >
             <Link href={'/'}>
               <HomeIcon size={16} />
@@ -101,9 +102,9 @@ const Menu = () => {
 
           <Button
             asChild
-            className="flex w-full items-center justify-start gap-1 bg-transparent"
+            className={` ${path === '/bookings' ? 'bg-primary' : 'bg-transparent'} flex w-full items-center justify-start gap-1`}
           >
-            <Link href={'/'}>
+            <Link href={'/bookings'}>
               <Calendar size={16} />
               <span>Agendamentos</span>
             </Link>

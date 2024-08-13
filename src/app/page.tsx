@@ -1,4 +1,6 @@
 import { currentUser } from '@clerk/nextjs/server'
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,7 +9,7 @@ import ListBarberShop from '@/app/components/list-barbershop'
 import { Button } from '@/app/components/ui/button'
 
 import { quickSearchOptions } from './_constants/search'
-import BookingItem from './components/booking-item'
+// import BookingItem from './components/booking-item'
 import Header from './components/header'
 import SearchInput from './components/search-input'
 
@@ -17,6 +19,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const user = await currentUser()
+
   return (
     <div>
       <Header />
@@ -29,11 +32,13 @@ export default async function Home() {
                 {user?.firstName || 'Seja bem vindo'}
               </span>
             </h2>
-            <span className="text-sm">Sexta, 2 de Fevereiro</span>
+            <span className="text-sm">
+              {format(new Date(), "eeee, dd 'de' MMMM", { locale: ptBR })}
+            </span>
 
             <SearchInput />
 
-            <BookingItem />
+            {/* <BookingItem /> */}
           </div>
           <div className="hidden md:col-span-2 md:flex md:overflow-x-scroll [&::-webkit-scrollbar]:hidden">
             <ListBarberShop />
@@ -73,9 +78,7 @@ export default async function Home() {
           />
         </div>
 
-        <div className="md:hidden">
-          <BookingItem />
-        </div>
+        <div className="md:hidden">{/* <BookingItem /> */}</div>
 
         <h3 className="mb-3 mt-6 text-sm font-bold text-muted-foreground">
           Recomentados

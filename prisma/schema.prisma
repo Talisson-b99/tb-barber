@@ -33,6 +33,12 @@ model BarbershopService {
   bookings     Booking[]
 }
 
+enum Status {
+  CONFIRMED
+  CANCELED
+  COMPLETED
+}
+
 model Booking {
   id           String            @id @default(uuid())
   userId       String
@@ -43,6 +49,7 @@ model Booking {
   date         DateTime
   createdAt    DateTime          @default(now())
   updatedAt    DateTime          @updatedAt
+  status       Status            @default(CONFIRMED)
 
   @@unique([serviceId, date, barbershopId])
 }

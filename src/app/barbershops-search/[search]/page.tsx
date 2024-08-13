@@ -38,7 +38,7 @@ const BarbershopSearchPage = ({ searchParams }: BarbershopSearchPageProps) => {
     <div className="">
       <Header />
       <div className="relative mx-auto px-5 pb-6 md:max-w-[1440px] md:px-3">
-        <div className="w-[50%] py-6 md:absolute md:-top-24 md:left-24">
+        <div className="py-6 md:absolute md:-top-24 md:left-24 md:w-[50%]">
           <SearchInput />
         </div>
         <div className="md:pt-10">

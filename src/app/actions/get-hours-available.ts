@@ -51,7 +51,6 @@ export async function getHoursAvailable({
       return null
     })
     .filter((hour) => hour !== null)
-  console.log('hoursAvailableFuturre', hoursAvailableFuturre)
-  console.log('hoursAvailable', hoursAvailable)
+
   return hoursAvailableFuturre
 }
