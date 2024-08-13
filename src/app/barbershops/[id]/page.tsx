@@ -82,6 +82,13 @@ const BarbershopPage = ({ params }: BarbershopPage) => {
       </>
     )
 
+  const averageRating = data.bookings.reduce(
+    (acc, booking) => (acc += booking.rating || 0) / data.bookings.length,
+    0,
+  )
+
+  const reviews = data.bookings.filter((booking) => booking.rating !== null)
+
   return (
     <div>
       <div className="relative h-64 w-full">
@@ -104,7 +111,7 @@ const BarbershopPage = ({ params }: BarbershopPage) => {
         </p>
         <p className="flex items-center gap-2 text-sm">
           <Star size={16} className="fill-primary text-primary" />
-          5.0 (889 avaliações)
+          {averageRating} ({reviews.length} avaliações)
         </p>
       </div>
 

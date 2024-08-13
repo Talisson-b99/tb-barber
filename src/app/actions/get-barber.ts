@@ -11,6 +11,7 @@ export async function getBarber(id: string) {
     },
     include: {
       services: true,
+      bookings: true,
     },
   })
 

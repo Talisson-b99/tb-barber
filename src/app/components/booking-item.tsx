@@ -218,11 +218,23 @@ const BookingItem = ({ booking }: BookingItemProps) => {
 
                 {booking.status === 'COMPLETED' && (
                   <Dialog>
-                    <DialogTrigger asChild>
-                      <Button variant="default" className="w-full">
-                        Avaliar Barbearia
-                      </Button>
-                    </DialogTrigger>
+                    {booking.rating ? (
+                      <DialogClose asChild>
+                        <Button
+                          className="w-full bg-green-600"
+                          variant={'ghost'}
+                        >
+                          Avaliação realizada
+                        </Button>
+                      </DialogClose>
+                    ) : (
+                      <DialogTrigger asChild>
+                        <Button variant="default" className="w-full">
+                          Avaliar Barbearia
+                        </Button>
+                      </DialogTrigger>
+                    )}
+
                     <DialogContent className="flex w-[80%] flex-col items-center rounded-lg">
                       <span className="font-bold">Avalie sua experiência</span>
                       <span className="text-center text-sm text-muted-foreground">

@@ -68,7 +68,7 @@ const StarRating = ({ bookingId }: StarRatingProps) => {
           <DialogClose>Cancelar</DialogClose>
         </Button>
         <Button className="w-full" onClick={handleClickConfirmEvaluation}>
-          Confirmar
+          <DialogClose>Confirmar</DialogClose>
         </Button>
       </div>
     </div>

@@ -51,7 +51,7 @@ model Booking {
   createdAt    DateTime          @default(now())
   updatedAt    DateTime          @updatedAt
   status       Status            @default(CONFIRMED)
-  rating       Int               @default(5)
+  rating       Int?
 
   @@unique([serviceId, date, barbershopId])
 }
