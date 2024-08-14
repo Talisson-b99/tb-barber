@@ -1,23 +1,38 @@
 'use client'
 
-import { Barbershop } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 import { useQuery } from '@tanstack/react-query'
 
+import { getBarbers } from '../actions/get-barbers'
 import BabershopItem from './barbershop-item'
 import { Skeleton } from './ui/skeleton'
-
 const ListBarberShop = () => {
-  const { data, isLoading } = useQuery<Barbershop[]>({
+  const { data } = useQuery<
+    Prisma.BarbershopGetPayload<{
+      include: {
+        bookings: true
+      }
+    }>[]
+  >({
     queryKey: ['babershop'],
-    queryFn: () => fetch('/api/barbers').then((res) => res.json()),
+    queryFn: () => getBarbers(),
   })
-  if (isLoading)
+  if (!data)
     return (
-      <div className="flex gap-4 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
-        <Skeleton className="mt-6 h-[255px] w-full min-w-[167px] rounded-2xl" />
-        <Skeleton className="mt-6 h-[255px] w-full min-w-[167px] rounded-2xl" />
-        <Skeleton className="mt-6 h-[255px] w-full min-w-[167px] rounded-2xl" />
-      </div>
+      <>
+        <div className="flex gap-4 overflow-x-scroll md:hidden [&::-webkit-scrollbar]:hidden">
+          <Skeleton className="mt-6 h-[255px] w-full min-w-[167px] rounded-2xl" />
+          <Skeleton className="mt-6 h-[255px] w-full min-w-[167px] rounded-2xl" />
+          <Skeleton className="mt-6 h-[255px] w-full min-w-[167px] rounded-2xl" />
+        </div>
+
+        <div className="hidden grid-cols-4 gap-4 md:grid [&::-webkit-scrollbar]:hidden">
+          <Skeleton className="mt-6 h-[255px] w-full min-w-[167px] rounded-2xl" />
+          <Skeleton className="mt-6 h-[255px] w-full min-w-[167px] rounded-2xl" />
+          <Skeleton className="mt-6 h-[255px] w-full min-w-[167px] rounded-2xl" />
+          <Skeleton className="mt-6 h-[255px] w-full min-w-[167px] rounded-2xl" />
+        </div>
+      </>
     )
 
   return (

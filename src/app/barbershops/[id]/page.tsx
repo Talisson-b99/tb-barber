@@ -42,43 +42,72 @@ const BarbershopPage = ({ params }: BarbershopPage) => {
   if (!data)
     return (
       <>
-        <div className="relative">
-          <Skeleton className="h-64 w-full" />
-          <Skeleton className="absolute left-4 top-4 size-10" />
-          <Skeleton className="absolute right-4 top-4 size-10" />
-        </div>
-
-        <div className="space-y-3 px-5 py-3">
-          <Skeleton className="h-4 w-48" />
-          <Skeleton className="h-4 w-48" />
-          <Skeleton className="h-4 w-48" />
-        </div>
-
-        <div className="mt-12 space-y-3 px-5">
-          <Skeleton className="h-4 w-32" />
-          <Skeleton className="h-20 w-full" />
-        </div>
-
-        <div className="mt-12 space-y-3 px-5">
-          <Skeleton className="h-4 w-32" />
-
-          <Skeleton className="h-[136px] w-full" />
-          <Skeleton className="h-[136px] w-full" />
-          <Skeleton className="h-[136px] w-full" />
-          <Skeleton className="h-[136px] w-full" />
-          <Skeleton className="h-[136px] w-full" />
-          <Skeleton className="h-[136px] w-full" />
-        </div>
-
-        <div className="mt-12 space-y-3 px-5">
-          <div className="flex items-center justify-between">
-            <Skeleton className="h-4 w-48" />
-            <Skeleton className="h-9 w-20 rounded-md" />
+        <div className="md:hidden">
+          <div className="relative">
+            <Skeleton className="h-64 w-full" />
+            <Skeleton className="absolute left-4 top-4 size-10" />
+            <Skeleton className="absolute right-4 top-4 size-10" />
           </div>
 
-          <div className="flex items-center justify-between pb-6">
+          <div className="space-y-3 px-5 py-3">
             <Skeleton className="h-4 w-48" />
-            <Skeleton className="h-9 w-20 rounded-md" />
+            <Skeleton className="h-4 w-48" />
+            <Skeleton className="h-4 w-48" />
+          </div>
+
+          <div className="mt-12 space-y-3 px-5">
+            <Skeleton className="h-4 w-32" />
+            <Skeleton className="h-20 w-full" />
+          </div>
+
+          <div className="mt-12 space-y-3 px-5">
+            <Skeleton className="h-4 w-32" />
+
+            <Skeleton className="h-[136px] w-full" />
+            <Skeleton className="h-[136px] w-full" />
+            <Skeleton className="h-[136px] w-full" />
+            <Skeleton className="h-[136px] w-full" />
+            <Skeleton className="h-[136px] w-full" />
+            <Skeleton className="h-[136px] w-full" />
+          </div>
+
+          <div className="mt-12 space-y-3 px-5">
+            <div className="flex items-center justify-between">
+              <Skeleton className="h-4 w-48" />
+              <Skeleton className="h-9 w-20 rounded-md" />
+            </div>
+
+            <div className="flex items-center justify-between pb-6">
+              <Skeleton className="h-4 w-48" />
+              <Skeleton className="h-9 w-20 rounded-md" />
+            </div>
+          </div>
+        </div>
+
+        <div className="mx-auto max-w-[1440px]">
+          <Header />
+          <div className="mt-16 grid grid-cols-3 gap-8">
+            <div className="col-span-2 flex flex-col">
+              <div>
+                <Skeleton className="h-[485px] w-full" />
+
+                <div className="mt-3 space-y-2">
+                  <Skeleton className="h-4 w-48" />
+                  <Skeleton className="h-4 w-60" />
+                </div>
+              </div>
+
+              <div className="mt-14 grid grid-cols-2 gap-3">
+                <Skeleton className="h-[136px] w-full" />
+                <Skeleton className="h-[136px] w-full" />
+                <Skeleton className="h-[136px] w-full" />
+                <Skeleton className="h-[136px] w-full" />
+              </div>
+            </div>
+
+            <div>
+              <Skeleton className="h-screen w-[440px]" />
+            </div>
           </div>
         </div>
       </>

@@ -1,3 +1,5 @@
+'use client'
+
 import { Prisma } from '@prisma/client'
 import { Star } from 'lucide-react'
 import Image from 'next/image'
@@ -8,7 +10,11 @@ import { Button } from './ui/button'
 import { Card, CardContent } from './ui/card'
 
 interface BabershopItemProsp {
-  barber: Prisma.BarbershopGetPayload<{ include: { bookings: true } }>
+  barber: Prisma.BarbershopGetPayload<{
+    include: {
+      bookings: true
+    }
+  }>
 }
 
 const BabershopItem = ({ barber }: BabershopItemProsp) => {

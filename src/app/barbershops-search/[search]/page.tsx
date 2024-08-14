@@ -22,15 +22,21 @@ const BarbershopSearchPage = ({ searchParams }: BarbershopSearchPageProps) => {
 
   if (!data) {
     return (
-      <div className="px-5">
-        <Skeleton className="my-6 h-[40px] w-full rounded-xl" />
+      <>
+        <div className="px-5">
+          <Skeleton className="my-6 h-[40px] w-full rounded-xl" />
 
-        <div className="grid grid-cols-2 gap-4">
-          <Skeleton className="mt-6 h-[255px] min-w-[167px] rounded-2xl" />
-          <Skeleton className="mt-6 h-[255px] min-w-[167px] rounded-2xl" />
-          <Skeleton className="mt-6 h-[255px] min-w-[167px] rounded-2xl" />
+          <div className="grid grid-cols-5 gap-4">
+            <Skeleton className="mt-6 h-[255px] min-w-[167px] rounded-2xl" />
+            <Skeleton className="mt-6 h-[255px] min-w-[167px] rounded-2xl" />
+            <Skeleton className="mt-6 h-[255px] min-w-[167px] rounded-2xl" />
+            <Skeleton className="mt-6 h-[255px] min-w-[167px] rounded-2xl" />
+            <Skeleton className="mt-6 h-[255px] min-w-[167px] rounded-2xl" />
+          </div>
         </div>
-      </div>
+
+        <div></div>
+      </>
     )
   }
 
