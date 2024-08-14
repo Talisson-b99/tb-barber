@@ -24,6 +24,9 @@ export async function searchdBarber(search: string) {
         },
       ],
     },
+    include: {
+      bookings: true,
+    },
   })
 
   return barber

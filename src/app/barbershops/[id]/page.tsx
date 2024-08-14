@@ -7,10 +7,12 @@ import Link from 'next/link'
 import { toast } from 'sonner'
 
 import { getBarber } from '@/app/actions/get-barber'
+import Header from '@/app/components/header'
 import Menu from '@/app/components/menu'
 import { Button } from '@/app/components/ui/button'
 import { Skeleton } from '@/app/components/ui/skeleton'
 
+import AsideInfoBarbershop from './components/aside-info-barbershop'
 import ServiceItem from './components/service-item'
 
 interface BarbershopPage {
@@ -82,75 +84,100 @@ const BarbershopPage = ({ params }: BarbershopPage) => {
       </>
     )
 
-  const averageRating = data.bookings.reduce(
-    (acc, booking) => (acc += booking.rating || 0) / data.bookings.length,
+  const reviews = data.bookings.filter((booking) => booking.rating !== null)
+
+  const ratingTotal = data.bookings.reduce(
+    (acc, booking) => (acc += booking.rating || 0),
     0,
   )
 
-  const reviews = data.bookings.filter((booking) => booking.rating !== null)
+  const averageRating =
+    reviews.length > 0 ? (ratingTotal / reviews.length).toFixed(1) : 0
 
   return (
     <div>
-      <div className="relative h-64 w-full">
-        <Image src={data?.imageUrl} fill alt={data?.name} />
-        <Link href={'/'} className="absolute left-4 top-4">
-          <Button variant={'outline'} size={'icon'}>
-            <ArrowLeft />
-          </Button>
-        </Link>
-        <div className="absolute right-4 top-4">
-          <Menu />
-        </div>
+      <div className="hidden md:flex">
+        <Header />
       </div>
-
-      <div className="border-b px-5 pb-6 pt-3">
-        <h2 className="mb-3 text-xl font-bold">{data.name}</h2>
-        <p className="mb-2 flex items-center gap-2 text-sm">
-          <MapPin size={16} className="text-primary" />
-          {data.address}
-        </p>
-        <p className="flex items-center gap-2 text-sm">
-          <Star size={16} className="fill-primary text-primary" />
-          {averageRating} ({reviews.length} avaliações)
-        </p>
-      </div>
-
-      <div className="border-b px-5 py-6">
-        <h3 className="text-xs font-bold text-muted-foreground">SOBRE NÓS</h3>
-        <p className="mt-3 text-justify text-sm">{data.description}</p>
-      </div>
-
-      <div className="mt-6 border-b pb-6">
-        <h3 className="mb-3 px-5 text-xs font-bold text-muted-foreground">
-          Serviços
-        </h3>
-        <div className="flex flex-col gap-3 px-5">
-          {data.services.map((service) => (
-            <ServiceItem key={service.id} barber={data} service={service} />
-          ))}
-        </div>
-      </div>
-
-      <div className="px-5 pb-6 pt-3">
-        <h3 className="mb-3 text-xs font-bold text-muted-foreground">
-          Contados
-        </h3>
-
-        <div className="space-y-3">
-          {data.phones.map((phone, i) => (
-            <div className="flex items-center gap-2" key={i}>
-              <Smartphone size={16} />
-              <span>{phone}</span>
-              <Button
-                variant={'outline'}
-                className="ml-auto"
-                size={'sm'}
-                onClick={() => handleCopyPhone(phone)}
-              >
-                Copiar
-              </Button>
+      <div className="flex flex-col md:mx-auto md:mt-10 md:grid md:w-full md:max-w-[1440px] md:grid-cols-3 md:gap-x-8 md:px-6 md:py-6">
+        <div className="col-span-2 flex flex-col">
+          <div>
+            <div className="relative h-64 w-full md:h-[485px] md:w-full">
+              <Image
+                src={data?.imageUrl}
+                fill
+                alt={data?.name}
+                className="object-cover md:rounded-xl"
+              />
+              <Link href={'/'} className="absolute left-4 top-4 md:hidden">
+                <Button variant={'outline'} size={'icon'}>
+                  <ArrowLeft />
+                </Button>
+              </Link>
+              <div className="absolute right-4 top-4 md:hidden">
+                <Menu />
+              </div>
             </div>
-          ))}
+
+            <div className="border-b px-5 pb-6 pt-3 md:flex md:justify-between md:border-none md:px-0">
+              <div>
+                <h2 className="mb-3 text-xl font-bold">{data.name}</h2>
+                <p className="mb-2 flex items-center gap-2 text-sm">
+                  <MapPin size={16} className="text-primary" />
+                  {data.address}
+                </p>
+              </div>
+              <p className="flex items-center gap-2 text-sm">
+                <Star size={16} className="fill-primary text-primary" />
+                {averageRating} ({reviews.length} avaliações)
+              </p>
+            </div>
+          </div>
+
+          <div className="border-b px-5 py-6 md:hidden">
+            <h3 className="text-xs font-bold text-muted-foreground">
+              SOBRE NÓS
+            </h3>
+            <p className="mt-3 text-justify text-sm">{data.description}</p>
+          </div>
+
+          <div className="mt-6 border-b pb-6 md:border-none">
+            <h3 className="mb-3 px-5 text-xs font-bold text-muted-foreground md:px-0">
+              Serviços
+            </h3>
+            <div className="flex flex-col gap-3 px-5 md:grid md:grid-cols-2 md:px-0">
+              {data.services.map((service) => (
+                <ServiceItem key={service.id} barber={data} service={service} />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="px-5 pb-6 pt-3 md:hidden">
+          <h3 className="mb-3 text-xs font-bold text-muted-foreground">
+            Contados
+          </h3>
+
+          <div className="space-y-3">
+            {data.phones.map((phone, i) => (
+              <div className="flex items-center gap-2" key={i}>
+                <Smartphone size={16} />
+                <span>{phone}</span>
+                <Button
+                  variant={'outline'}
+                  className="ml-auto"
+                  size={'sm'}
+                  onClick={() => handleCopyPhone(phone)}
+                >
+                  Copiar
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <AsideInfoBarbershop barber={data} />
         </div>
       </div>
     </div>

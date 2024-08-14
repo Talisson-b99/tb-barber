@@ -1,6 +1,6 @@
 'use client'
 
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Star } from 'lucide-react'
 import { useState } from 'react'
 import { toast } from 'sonner'
@@ -11,9 +11,11 @@ import { DialogClose } from './ui/dialog'
 
 interface StarRatingProps {
   bookingId: string
+  setIsSheetOpen: (value: boolean) => void
 }
 
-const StarRating = ({ bookingId }: StarRatingProps) => {
+const StarRating = ({ bookingId, setIsSheetOpen }: StarRatingProps) => {
+  const queryClient = useQueryClient()
   const [rating, setRating] = useState(0)
   const [hover, setHover] = useState(0)
 
@@ -26,6 +28,10 @@ const StarRating = ({ bookingId }: StarRatingProps) => {
     onSuccess: () => {
       toast.success('Avaliação realizada com sucesso', {
         id: 'evaluate-booking',
+      })
+      setIsSheetOpen(true)
+      queryClient.invalidateQueries({
+        queryKey: ['bookings'],
       })
     },
     onError: () => {

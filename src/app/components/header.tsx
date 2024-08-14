@@ -12,7 +12,7 @@ import { Button } from './ui/button'
 const Header = () => {
   const { user } = useUser()
   return (
-    <header className="border-b">
+    <header className="w-full border-b">
       <div className="flex items-center justify-between px-5 py-3 md:mx-auto md:w-full md:max-w-[1440px] md:px-3 md:py-6">
         <Link href={'/'}>
           <Image
@@ -31,8 +31,11 @@ const Header = () => {
           {user ? (
             <div className="flex items-center gap-6">
               <Button asChild variant={'ghost'}>
-                <Link href={'#'} className="flex items-center gap-2 font-bold">
-                  <Calendar />
+                <Link
+                  href={'#'}
+                  className="flex items-center gap-2 text-sm font-bold"
+                >
+                  <Calendar size={16} />
                   Agendamentos
                 </Link>
               </Button>
@@ -40,12 +43,12 @@ const Header = () => {
                 <Avatar>
                   <AvatarImage src={user?.imageUrl} />
                 </Avatar>
-                <span className="font-bold">{user?.fullName}</span>
+                <span className="text-sm font-bold">{user?.fullName}</span>
                 <Button asChild variant={'ghost'} className="cursor-pointer">
                   <SignOutButton
                     children={
                       <div>
-                        <LogOut />
+                        <LogOut size={16} />
                       </div>
                     }
                   />

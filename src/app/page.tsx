@@ -23,7 +23,7 @@ export default async function Home() {
   return (
     <div>
       <Header />
-      <div className="px-5 py-6 md:mx-auto md:w-full md:max-w-[1440px] md:px-3">
+      <div className="px-5 py-6 md:mx-auto md:w-full md:max-w-[1440px] md:px-6">
         <div className="md:grid md:grid-cols-3 md:gap-x-32">
           <div className="space-y-6">
             <h2 className="text-xl">

@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import Image from 'next/image'
+import { useState } from 'react'
 import { toast } from 'sonner'
 
 import { cancelBooking } from '../actions/cancel-booking'
@@ -29,6 +30,8 @@ interface BookingItemProps {
 }
 
 const BookingItem = ({ booking }: BookingItemProps) => {
+  const [isSheetOpen, setIsSheetOpen] = useState(false)
+
   const queryClient = useQueryClient()
   const { mutate } = useMutation({
     mutationKey: ['cancelBooking', booking.id],
@@ -56,7 +59,7 @@ const BookingItem = ({ booking }: BookingItemProps) => {
   }
   return (
     <>
-      <Sheet>
+      <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
         <SheetTrigger asChild>
           <Card className="mt-3">
             <CardContent className="flex justify-between p-0">
@@ -241,7 +244,10 @@ const BookingItem = ({ booking }: BookingItemProps) => {
                         Toque nas estrelas para avaliar sua experiência na{' '}
                         {booking.barber.name}
                       </span>
-                      <StarRating bookingId={booking.id} />
+                      <StarRating
+                        bookingId={booking.id}
+                        setIsSheetOpen={setIsSheetOpen}
+                      />
                     </DialogContent>
                   </Dialog>
                 )}
