@@ -20,6 +20,6 @@ export async function getBookings() {
       service: true,
     },
   })
-
+  console.log('bookings', bookings)
   return bookings
 }

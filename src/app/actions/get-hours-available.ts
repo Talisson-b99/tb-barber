@@ -31,12 +31,16 @@ export async function getHoursAvailable({
     },
     select: {
       date: true,
+      status: true,
     },
   })
 
-  const bookedHours = bookings.map((booking) =>
-    format(new Date(booking.date), 'HH:mm'),
-  )
+  const bookedHours = bookings.map((booking) => {
+    if (booking.status === 'CANCELED') {
+      return null
+    }
+    return format(new Date(booking.date), 'HH:mm')
+  })
 
   const hoursAvailable = barbershop.hoursAvailable.filter(
     (hour) => !bookedHours.includes(hour),

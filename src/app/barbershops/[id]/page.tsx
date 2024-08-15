@@ -42,7 +42,7 @@ const BarbershopPage = ({ params }: BarbershopPage) => {
   if (!data)
     return (
       <>
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <div className="relative">
             <Skeleton className="h-64 w-full" />
             <Skeleton className="absolute left-4 top-4 size-10" />
@@ -74,12 +74,12 @@ const BarbershopPage = ({ params }: BarbershopPage) => {
           <div className="mt-12 space-y-3 px-5">
             <div className="flex items-center justify-between">
               <Skeleton className="h-4 w-48" />
-              <Skeleton className="h-9 w-20 rounded-md" />
+              <Skeleton className="h-9 w-20 rounded-lg" />
             </div>
 
             <div className="flex items-center justify-between pb-6">
               <Skeleton className="h-4 w-48" />
-              <Skeleton className="h-9 w-20 rounded-md" />
+              <Skeleton className="h-9 w-20 rounded-lg" />
             </div>
           </div>
         </div>
@@ -125,30 +125,30 @@ const BarbershopPage = ({ params }: BarbershopPage) => {
 
   return (
     <div>
-      <div className="hidden md:flex">
+      <div className="hidden lg:flex">
         <Header />
       </div>
-      <div className="flex flex-col md:mx-auto md:mt-10 md:grid md:w-full md:max-w-[1440px] md:grid-cols-3 md:gap-x-8 md:px-6 md:py-6">
+      <div className="flex flex-col lg:mx-auto lg:mt-10 lg:grid lg:w-full lg:max-w-[1440px] lg:grid-cols-3 lg:gap-x-8 lg:px-6 lg:py-6">
         <div className="col-span-2 flex flex-col">
           <div>
-            <div className="relative h-64 w-full md:h-[485px] md:w-full">
+            <div className="relative h-64 w-full lg:h-[485px] lg:w-full">
               <Image
                 src={data?.imageUrl}
                 fill
                 alt={data?.name}
-                className="object-cover md:rounded-xl"
+                className="object-cover lg:rounded-xl"
               />
-              <Link href={'/'} className="absolute left-4 top-4 md:hidden">
+              <Link href={'/'} className="absolute left-4 top-4 lg:hidden">
                 <Button variant={'outline'} size={'icon'}>
                   <ArrowLeft />
                 </Button>
               </Link>
-              <div className="absolute right-4 top-4 md:hidden">
+              <div className="absolute right-4 top-4 lg:hidden">
                 <Menu />
               </div>
             </div>
 
-            <div className="border-b px-5 pb-6 pt-3 md:flex md:justify-between md:border-none md:px-0">
+            <div className="border-b px-5 pb-6 pt-3 lg:flex lg:justify-between lg:border-none lg:px-0">
               <div>
                 <h2 className="mb-3 text-xl font-bold">{data.name}</h2>
                 <p className="mb-2 flex items-center gap-2 text-sm">
@@ -163,18 +163,18 @@ const BarbershopPage = ({ params }: BarbershopPage) => {
             </div>
           </div>
 
-          <div className="border-b px-5 py-6 md:hidden">
+          <div className="border-b px-5 py-6 lg:hidden">
             <h3 className="text-xs font-bold text-muted-foreground">
               SOBRE NÓS
             </h3>
             <p className="mt-3 text-justify text-sm">{data.description}</p>
           </div>
 
-          <div className="mt-6 border-b pb-6 md:border-none">
-            <h3 className="mb-3 px-5 text-xs font-bold text-muted-foreground md:px-0">
+          <div className="mt-6 border-b pb-6 lg:border-none">
+            <h3 className="mb-3 px-5 text-xs font-bold text-muted-foreground lg:px-0">
               Serviços
             </h3>
-            <div className="flex flex-col gap-3 px-5 md:grid md:grid-cols-2 md:px-0">
+            <div className="flex flex-col gap-3 px-5 lg:grid lg:grid-cols-2 lg:px-0">
               {data.services.map((service) => (
                 <ServiceItem key={service.id} barber={data} service={service} />
               ))}
@@ -182,7 +182,7 @@ const BarbershopPage = ({ params }: BarbershopPage) => {
           </div>
         </div>
 
-        <div className="px-5 pb-6 pt-3 md:hidden">
+        <div className="px-5 pb-6 pt-3 lg:hidden">
           <h3 className="mb-3 text-xs font-bold text-muted-foreground">
             Contados
           </h3>
@@ -205,7 +205,7 @@ const BarbershopPage = ({ params }: BarbershopPage) => {
           </div>
         </div>
 
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <AsideInfoBarbershop barber={data} />
         </div>
       </div>

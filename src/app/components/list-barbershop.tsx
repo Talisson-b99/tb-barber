@@ -20,13 +20,13 @@ const ListBarberShop = () => {
   if (!data)
     return (
       <>
-        <div className="flex gap-4 overflow-x-scroll md:hidden [&::-webkit-scrollbar]:hidden">
+        <div className="flex gap-4 overflow-x-scroll lg:hidden [&::-webkit-scrollbar]:hidden">
           <Skeleton className="mt-6 h-[255px] w-full min-w-[167px] rounded-2xl" />
           <Skeleton className="mt-6 h-[255px] w-full min-w-[167px] rounded-2xl" />
           <Skeleton className="mt-6 h-[255px] w-full min-w-[167px] rounded-2xl" />
         </div>
 
-        <div className="hidden grid-cols-4 gap-4 overflow-x-scroll md:grid [&::-webkit-scrollbar]:hidden">
+        <div className="hidden grid-cols-4 gap-4 overflow-x-scroll lg:grid [&::-webkit-scrollbar]:hidden">
           <Skeleton className="mt-6 h-[255px] w-full min-w-[167px] rounded-2xl" />
           <Skeleton className="mt-6 h-[255px] w-full min-w-[167px] rounded-2xl" />
           <Skeleton className="mt-6 h-[255px] w-full min-w-[167px] rounded-2xl" />

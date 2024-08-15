@@ -1,19 +1,31 @@
 'use client'
 
-import { Barbershop } from '@prisma/client'
+import { Barbershop, BarbershopService, Booking } from '@prisma/client'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import { Smartphone } from 'lucide-react'
 import Image from 'next/image'
 import { toast } from 'sonner'
 
+import { cancelBooking } from '@/app/actions/cancel-booking'
 import { Button } from '@/app/components/ui/button'
+import { Card, CardContent } from '@/app/components/ui/card'
 
 import OperatingTable from './operating-table'
 
 interface AsideInfoBarbershopProps {
   barber: Barbershop
+  booking?: Booking
+  service?: BarbershopService
 }
 
-const AsideInfoBarbershop = ({ barber }: AsideInfoBarbershopProps) => {
+const AsideInfoBarbershop = ({
+  barber,
+  booking,
+  service,
+}: AsideInfoBarbershopProps) => {
+  const queryClient = useQueryClient()
   const handleCopyPhone = (phone: string) => {
     navigator.clipboard
       .writeText(phone)
@@ -25,6 +37,30 @@ const AsideInfoBarbershop = ({ barber }: AsideInfoBarbershopProps) => {
         toast.error('Falha ao copiar o telefone.')
       })
   }
+
+  const { mutate } = useMutation({
+    mutationKey: ['cancelBooking', booking?.id],
+    mutationFn: cancelBooking,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['bookings'],
+      })
+      toast.success('Reserva cancelada com sucesso', {
+        id: 'cancel-booking',
+      })
+    },
+    onError: () => {
+      toast.error('Erro ao cancelar reserva', {
+        id: 'cancel-booking',
+      })
+    },
+  })
+
+  function handleCancelBooking() {
+    if (!booking) return
+    mutate(booking?.id)
+  }
+
   return (
     <aside className="sticky top-0 rounded-[30px] bg-[#1A1B1F]">
       <div className="p-5">
@@ -75,9 +111,55 @@ const AsideInfoBarbershop = ({ barber }: AsideInfoBarbershopProps) => {
           ))}
         </div>
 
-        <div className="border-y py-5">
-          <OperatingTable hours={barber.hoursAvailable} />
+        <div className="border-t py-5">
+          {booking && service ? (
+            <Card>
+              <CardContent className="space-y-3 p-3">
+                <div className="flex justify-between">
+                  <span className="font-bold">{service.name}</span>
+                  <span className="text-sm font-bold">
+                    {Number(service.price).toLocaleString('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                    })}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">data</span>
+                  <span>
+                    {format(booking.date, "eeee, dd 'de' MMMM", {
+                      locale: ptBR,
+                    })}
+                  </span>
+                </div>
+
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Horário</span>
+                  <span>{format(booking.date, 'HH:mm', { locale: ptBR })}</span>
+                </div>
+
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Barbearia</span>
+                  <span>{barber.name}</span>
+                </div>
+              </CardContent>
+            </Card>
+          ) : (
+            <OperatingTable hours={barber.hoursAvailable} />
+          )}
         </div>
+
+        {booking?.status === 'CONFIRMED' && (
+          <div className="pt-5">
+            <Button
+              className="w-full"
+              variant={'destructive'}
+              onClick={handleCancelBooking}
+            >
+              Cancelar reserva
+            </Button>
+          </div>
+        )}
       </div>
     </aside>
   )

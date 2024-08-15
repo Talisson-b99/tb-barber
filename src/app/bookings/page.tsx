@@ -1,6 +1,6 @@
 'use client'
 
-import { Barbershop } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 
@@ -16,9 +16,16 @@ const BookingsPage = () => {
     queryKey: ['bookings'],
     queryFn: () => getBookings(),
   })
-  const [barber, setBarber] = useState<Barbershop>()
 
-  function handleChangeBarber(barber: Barbershop) {
+  type bookings = Prisma.BookingGetPayload<{
+    include: {
+      barber: true
+      service: true
+    }
+  }>
+  const [barber, setBarber] = useState<bookings>()
+
+  function handleChangeBarber(barber: bookings) {
     setBarber(barber)
   }
 
@@ -26,17 +33,17 @@ const BookingsPage = () => {
     return (
       <div>
         <Header />
-        <div className="my-6 px-5 md:hidden">
+        <div className="my-6 px-5 lg:hidden">
           <Skeleton className="h-[22px] w-[160px]" />
         </div>
-        <div className="flex flex-col gap-3 px-5 md:hidden">
+        <div className="flex flex-col gap-3 px-5 lg:hidden">
           <Skeleton className="h-[120px] w-full" />
           <Skeleton className="h-[120px] w-full" />
           <Skeleton className="h-[120px] w-full" />
           <Skeleton className="h-[120px] w-full" />
         </div>
 
-        <div className="mt-8 hidden grid-cols-2 md:grid">
+        <div className="mt-8 hidden grid-cols-2 lg:grid">
           <div className="my-6 px-5">
             <Skeleton className="mb-8 h-[22px] w-[160px]" />
             <div className="space-y-3">
@@ -69,7 +76,7 @@ const BookingsPage = () => {
     <div>
       <Header />
 
-      <div className="gap-x-8 px-5 pt-6 md:grid md:grid-cols-2">
+      <div className="gap-x-8 px-5 pt-6 lg:grid lg:grid-cols-2">
         <div>
           <h2 className="mb-6 text-xl font-bold">Agendamentos</h2>
           {bookingsConfirmed.length > 0 && (
@@ -79,14 +86,14 @@ const BookingsPage = () => {
               </h3>
               {bookingsConfirmed.map((booking) => (
                 <>
-                  <div className="md:hidden">
+                  <div className="lg:hidden">
                     <BookingItem booking={booking} />
                   </div>
 
-                  <div className="hidden md:block">
+                  <div className="hidden lg:block">
                     <CardBooking
                       booking={booking}
-                      onclick={() => handleChangeBarber(booking.barber)}
+                      onclick={() => handleChangeBarber(booking)}
                     />
                   </div>
                 </>
@@ -101,14 +108,14 @@ const BookingsPage = () => {
               </h3>
               {bookingsFinish.map((booking) => (
                 <>
-                  <div className="md:hidden">
+                  <div className="lg:hidden">
                     <BookingItem booking={booking} />
                   </div>
 
-                  <div className="hidden md:block">
+                  <div className="hidden lg:block">
                     <CardBooking
                       booking={booking}
-                      onclick={() => handleChangeBarber(booking.barber)}
+                      onclick={() => handleChangeBarber(booking)}
                     />
                   </div>
                 </>
@@ -123,14 +130,14 @@ const BookingsPage = () => {
               </h3>
               {bookingsCanceled.map((booking) => (
                 <>
-                  <div className="md:hidden">
+                  <div className="lg:hidden">
                     <BookingItem booking={booking} />
                   </div>
 
-                  <div className="hidden md:block">
+                  <div className="hidden lg:block">
                     <CardBooking
                       booking={booking}
-                      onclick={() => handleChangeBarber(booking.barber)}
+                      onclick={() => handleChangeBarber(booking)}
                     />
                   </div>
                 </>
@@ -139,8 +146,12 @@ const BookingsPage = () => {
           )}
         </div>
         {barber && (
-          <div className="hidden md:block md:max-w-[90%]">
-            <AsideInfoBarbershop barber={barber} />
+          <div className="hidden lg:block lg:max-w-[90%]">
+            <AsideInfoBarbershop
+              barber={barber.barber}
+              booking={barber}
+              service={barber.service}
+            />
           </div>
         )}
       </div>

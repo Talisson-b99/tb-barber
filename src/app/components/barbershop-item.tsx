@@ -27,9 +27,9 @@ const BabershopItem = ({ barber }: BabershopItemProsp) => {
 
   const averageRating = reviews.length > 0 ? ratingTotal / reviews.length : 0
   return (
-    <Card className="h-fit w-full min-w-[167px] rounded-2xl md:min-w-[220px]">
+    <Card className="h-fit w-full min-w-[167px] rounded-2xl lg:min-w-[220px]">
       <CardContent className="p-0">
-        <div className="relative h-[160px] w-full md:h-[200px]">
+        <div className="relative h-[160px] w-full lg:h-[200px]">
           {averageRating > 0 && (
             <Badge className="absolute left-2 top-2 z-10 flex items-center gap-px bg-[#221C3D]/70 py-1 text-xs font-bold">
               <Star size={12} fill="text-primary" />

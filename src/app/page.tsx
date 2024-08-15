@@ -23,8 +23,8 @@ export default async function Home() {
   return (
     <div>
       <Header />
-      <div className="px-5 py-6 md:mx-auto md:w-full md:max-w-[1440px] md:px-6">
-        <div className="md:grid md:grid-cols-3 md:gap-x-32">
+      <div className="px-5 py-6 lg:mx-auto lg:w-full lg:max-w-[1440px] lg:px-6">
+        <div className="lg:grid lg:grid-cols-3 lg:gap-x-32">
           <div className="space-y-6">
             <h2 className="text-xl">
               Olá,{' '}
@@ -40,12 +40,12 @@ export default async function Home() {
 
             {/* <BookingItem /> */}
           </div>
-          <div className="hidden md:col-span-2 md:flex md:overflow-x-scroll [&::-webkit-scrollbar]:hidden">
+          <div className="hidden lg:col-span-2 lg:flex lg:overflow-x-scroll [&::-webkit-scrollbar]:hidden">
             <ListBarberShop />
           </div>
         </div>
 
-        <div className="mt-6 flex gap-3 overflow-x-scroll md:hidden [&::-webkit-scrollbar]:hidden">
+        <div className="mt-6 flex gap-3 overflow-x-scroll lg:hidden [&::-webkit-scrollbar]:hidden">
           {quickSearchOptions.map((item) => (
             <Button
               className="gap-2"
@@ -69,7 +69,7 @@ export default async function Home() {
           ))}
         </div>
 
-        <div className="relative mt-6 h-36 w-full md:hidden">
+        <div className="relative mt-6 h-36 w-full lg:hidden">
           <Image
             src={'/banner-01.png'}
             alt="agende nos melhores"
@@ -78,7 +78,7 @@ export default async function Home() {
           />
         </div>
 
-        <div className="md:hidden">{/* <BookingItem /> */}</div>
+        <div className="lg:hidden">{/* <BookingItem /> */}</div>
 
         <h3 className="mb-3 mt-6 text-sm font-bold text-muted-foreground">
           Recomentados

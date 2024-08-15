@@ -13,7 +13,7 @@ const Header = () => {
   const { user } = useUser()
   return (
     <header className="w-full border-b">
-      <div className="flex items-center justify-between px-5 py-3 md:mx-auto md:w-full md:max-w-[1440px] md:px-3 md:py-6">
+      <div className="flex items-center justify-between px-5 py-3 lg:mx-auto lg:w-full lg:max-w-[1440px] lg:px-3 lg:py-6">
         <Link href={'/'}>
           <Image
             src={'/logo.png'}
@@ -23,11 +23,11 @@ const Header = () => {
             quality={100}
           />
         </Link>
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <Menu />
         </div>
 
-        <div className="hidden md:flex">
+        <div className="hidden lg:flex">
           {user ? (
             <div className="flex items-center gap-6">
               <Button asChild variant={'ghost'}>

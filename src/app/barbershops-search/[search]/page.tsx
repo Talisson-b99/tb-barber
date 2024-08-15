@@ -26,7 +26,7 @@ const BarbershopSearchPage = ({ searchParams }: BarbershopSearchPageProps) => {
         <div className="px-5">
           <Skeleton className="my-6 h-[40px] w-full rounded-xl" />
 
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
             <Skeleton className="mt-6 h-[255px] min-w-[167px] rounded-2xl" />
             <Skeleton className="mt-6 h-[255px] min-w-[167px] rounded-2xl" />
             <Skeleton className="mt-6 h-[255px] min-w-[167px] rounded-2xl" />
@@ -43,16 +43,16 @@ const BarbershopSearchPage = ({ searchParams }: BarbershopSearchPageProps) => {
   return (
     <div className="">
       <Header />
-      <div className="relative mx-auto px-5 pb-6 md:max-w-[1440px] md:px-3">
-        <div className="py-6 md:absolute md:-top-24 md:left-24 md:w-[50%]">
+      <div className="relative mx-auto px-5 pb-6 lg:max-w-[1440px] lg:px-3">
+        <div className="py-6 lg:absolute lg:-top-24 lg:left-24 lg:w-[50%]">
           <SearchInput />
         </div>
-        <div className="md:pt-10">
-          <span className="mb-3 block text-xs font-bold uppercase text-muted-foreground md:mb-5 md:text-xl">
+        <div className="lg:pt-10">
+          <span className="mb-3 block text-xs font-bold uppercase text-muted-foreground lg:mb-5 lg:text-xl">
             RESULTADOS PARA &quot;{searchParams.q}&quot;
           </span>
 
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
             {data?.map((barber) => (
               <BabershopItem key={barber.id} barber={barber} />
             ))}
