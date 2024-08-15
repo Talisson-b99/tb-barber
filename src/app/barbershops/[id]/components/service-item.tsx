@@ -1,8 +1,9 @@
 'use client'
-import { useAuth } from '@clerk/nextjs'
+import { SignInButton, useAuth, useUser } from '@clerk/nextjs'
 import { Barbershop, BarbershopService } from '@prisma/client'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { set } from 'date-fns'
+import { LogIn } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
 import { toast } from 'sonner'
@@ -11,6 +12,11 @@ import { createBooking } from '@/app/actions/create-booking'
 import { getHollidays } from '@/app/actions/get-hollidays'
 import { Button } from '@/app/components/ui/button'
 import { Card, CardContent } from '@/app/components/ui/card'
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from '@/app/components/ui/dialog'
 import {
   Sheet,
   SheetContent,
@@ -31,6 +37,7 @@ interface ServiceItemProps {
 const ServiceItem = ({ service, barber }: ServiceItemProps) => {
   const queryClient = useQueryClient()
   const { userId } = useAuth()
+  const { user } = useUser()
   const [hoursSelected, setHoursSelected] = useState<string | undefined>(
     '09:00',
   )
@@ -121,36 +128,79 @@ const ServiceItem = ({ service, barber }: ServiceItemProps) => {
                 </Button>
               </SheetTrigger>
               <SheetContent className="flex flex-col p-0 px-5">
-                <SheetHeader className="borderb py-6">
-                  <SheetTitle className="text-left">Fazer Reserva</SheetTitle>
-                </SheetHeader>
-                <div>
-                  <CalendarComponent
-                    barberId={barber.id}
-                    hoursSelected={hoursSelected}
-                    handleChangeHourClick={handleChangeHourClick}
-                    date={date}
-                    setDate={setDate}
-                    defaultHolidays={data}
-                  />
-                </div>
+                {user ? (
+                  <>
+                    <SheetHeader className="borderb py-6">
+                      <SheetTitle className="text-left">
+                        Fazer Reserva
+                      </SheetTitle>
+                    </SheetHeader>
+                    <div>
+                      <CalendarComponent
+                        barberId={barber.id}
+                        hoursSelected={hoursSelected}
+                        handleChangeHourClick={handleChangeHourClick}
+                        date={date}
+                        setDate={setDate}
+                        defaultHolidays={data}
+                      />
+                    </div>
 
-                <InfoBooking
-                  barber={barber}
-                  service={service}
-                  hourSelected={hoursSelected}
-                  date={date}
-                />
+                    <InfoBooking
+                      barber={barber}
+                      service={service}
+                      hourSelected={hoursSelected}
+                      date={date}
+                    />
 
-                <div className="relative flex-1">
-                  <Button
-                    className="absolute bottom-6 w-full"
-                    onClick={handleBooking}
-                    disabled={!date || !hoursSelected || isPending}
-                  >
-                    Confirmar
-                  </Button>
-                </div>
+                    <div className="relative flex-1">
+                      <Button
+                        className="absolute bottom-6 w-full"
+                        onClick={handleBooking}
+                        disabled={!date || !hoursSelected || isPending}
+                      >
+                        Confirmar
+                      </Button>
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex h-screen justify-center">
+                    <div className="mt-16 flex w-full justify-between">
+                      <h3 className="text-lg font-bold">
+                        Olá. Faça seu login!
+                      </h3>
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button size={'icon'}>
+                            <LogIn size={16} />
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="flex w-[90%] flex-col items-center rounded-lg">
+                          <span className="font-bold">
+                            Faça login na plataforma
+                          </span>
+                          <span className="text-sm text-muted-foreground">
+                            Conecte-se usando sua conta do Google
+                          </span>
+                          <SignInButton>
+                            <Button
+                              className="flex w-full items-center gap-2 font-bold"
+                              variant={'outline'}
+                            >
+                              <Image
+                                src={'/google.svg'}
+                                width={16}
+                                height={16}
+                                alt={'Google'}
+                              />
+                              Google
+                            </Button>
+                          </SignInButton>
+                        </DialogContent>
+                      </Dialog>
+                    </div>
+                  </div>
+                )}
               </SheetContent>
             </Sheet>
           </div>
