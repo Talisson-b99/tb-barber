@@ -32,7 +32,7 @@ const Header = () => {
             <div className="flex items-center gap-6">
               <Button asChild variant={'ghost'}>
                 <Link
-                  href={'#'}
+                  href={'/bookings'}
                   className="flex items-center gap-2 text-sm font-bold"
                 >
                   <Calendar size={16} />
@@ -58,7 +58,10 @@ const Header = () => {
           ) : (
             <div className="flex items-center gap-6">
               <Button asChild variant={'ghost'}>
-                <Link href={'#'} className="flex items-center gap-2 font-bold">
+                <Link
+                  href={'/bookings'}
+                  className="flex items-center gap-2 font-bold"
+                >
                   <Calendar />
                   Agendamentos
                 </Link>

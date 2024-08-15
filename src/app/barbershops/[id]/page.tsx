@@ -205,7 +205,7 @@ const BarbershopPage = ({ params }: BarbershopPage) => {
           </div>
         </div>
 
-        <div>
+        <div className="hidden md:block">
           <AsideInfoBarbershop barber={data} />
         </div>
       </div>

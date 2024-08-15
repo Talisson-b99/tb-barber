@@ -1,13 +1,14 @@
 'use client'
 import { useAuth } from '@clerk/nextjs'
 import { Barbershop, BarbershopService } from '@prisma/client'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { set } from 'date-fns'
 import Image from 'next/image'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
 import { createBooking } from '@/app/actions/create-booking'
+import { getHollidays } from '@/app/actions/get-hollidays'
 import { Button } from '@/app/components/ui/button'
 import { Card, CardContent } from '@/app/components/ui/card'
 import {
@@ -81,6 +82,12 @@ const ServiceItem = ({ service, barber }: ServiceItemProps) => {
     })
   }
 
+  const { data } = useQuery({
+    queryKey: ['holiday', barber.id],
+    queryFn: () => getHollidays(),
+    staleTime: 1000 * 60 * 60 * 24 * 7,
+  })
+
   return (
     <Card>
       <CardContent className="flex gap-3 p-3">
@@ -124,6 +131,7 @@ const ServiceItem = ({ service, barber }: ServiceItemProps) => {
                     handleChangeHourClick={handleChangeHourClick}
                     date={date}
                     setDate={setDate}
+                    defaultHolidays={data}
                   />
                 </div>
 

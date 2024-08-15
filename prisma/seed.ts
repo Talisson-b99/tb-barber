@@ -16,16 +16,6 @@ async function seedDatabase() {
       'https://fsw-barber.s3.amazonaws.com/barbers/08.png',
       'https://fsw-barber.s3.amazonaws.com/barbers/09.png',
       'https://fsw-barber.s3.amazonaws.com/barbers/10.png',
-      'https://fsw-barber.s3.amazonaws.com/barbers/11.png',
-      'https://fsw-barber.s3.amazonaws.com/barbers/12.png',
-      'https://fsw-barber.s3.amazonaws.com/barbers/13.png',
-      'https://fsw-barber.s3.amazonaws.com/barbers/14.png',
-      'https://fsw-barber.s3.amazonaws.com/barbers/15.png',
-      'https://fsw-barber.s3.amazonaws.com/barbers/16.png',
-      'https://fsw-barber.s3.amazonaws.com/barbers/17.png',
-      'https://fsw-barber.s3.amazonaws.com/barbers/18.png',
-      'https://fsw-barber.s3.amazonaws.com/barbers/19.png',
-      'https://fsw-barber.s3.amazonaws.com/barbers/20.png',
     ]
     // Nomes criativos para as barbearias
     const creativeNames = [
@@ -79,7 +69,7 @@ async function seedDatabase() {
         description: 'Expressão acentuada com modelagem precisa.',
         price: 20.0,
         imageUrl:
-          'https://fsw-barber.s3.amazonaws.com/servicos/sombrancelha.png',
+          'https://fsw-barber.s3.amazonaws.com/servicos/sobrancelha.png',
       },
       {
         name: 'Massagem',
@@ -92,9 +82,34 @@ async function seedDatabase() {
         name: 'Hidratação',
         description: 'Hidratação profunda para cabelo e barba.',
         price: 25.0,
-        imageUrl:
-          'https://fsw-barber.s3.amazonaws.com/servicos/sombrancelha.png',
+        imageUrl: 'https://fsw-barber.s3.amazonaws.com/servicos/hidratacao.png',
       },
+    ]
+
+    const phones = [
+      ['(11) 98967-4945', '(11) 98967-4945'],
+      ['(11) 98967-4946', '(11) 98967-4946'],
+      ['(11) 98967-4947', '(11) 98967-4947'],
+      ['(11) 98967-4948', '(11) 98967-4948'],
+      ['(11) 98967-4949', '(11) 98967-4949'],
+      ['(11) 98967-4950', '(11) 98967-4950'],
+      ['(11) 98967-4951', '(11) 98967-4951'],
+      ['(11) 98967-4952', '(11) 98967-4952'],
+      ['(11) 98967-4953', '(11) 98967-4953'],
+      ['(11) 98967-4954', '(11) 98967-4954'],
+    ]
+
+    const descriptions = [
+      'Onde o estilo clássico encontra o moderno. Corte, barba e cuidado masculino com excelência em cada detalhe.',
+      'A arte de barbear levada a sério. Estilo autêntico e atendimento personalizado para homens que sabem o valor de uma boa aparência.',
+      'Cortes precisos, barbas impecáveis. Um espaço dedicado ao cuidado masculino, onde você é tratado como rei.',
+      'Resgatando a tradição com um toque contemporâneo. Corte clássico e tratamento premium em um só lugar.',
+      'Estilo, conforto e cuidado em um só lugar. Experiência relaxante com um toque de luxo.',
+      'Uma barbearia que entende o homem moderno. Serviços sob medida para quem valoriza elegância e bem-estar.',
+      'Autenticidade e estilo em cada detalhe. Ambiente acolhedor e profissionais experientes.',
+      'Onde cada detalhe importa. Do corte tradicional ao estilo moderno, o melhor em cuidados pessoais.',
+      'Uma barbearia para quem vive a cidade. Ambiente descontraído e serviço de excelência.',
+      'Inspirada nas barbearias de antigamente, mas com um toque de modernidade. Atendimento com atenção e respeito.',
     ]
 
     // Criar 10 barbearias com nomes e endereços fictícios
@@ -103,15 +118,16 @@ async function seedDatabase() {
       const name = creativeNames[i]
       const address = addresses[i]
       const imageUrl = images[i]
+      const phone = phones[i]
+      const description = descriptions[i]
 
       const barbershop = await prisma.barbershop.create({
         data: {
           name,
           address,
           imageUrl,
-          phones: ['(11) 99999-9999', '(11) 99999-9999'],
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac augue ullamcorper, pharetra orci mollis, auctor tellus. Phasellus pharetra erat ac libero efficitur tempus. Donec pretium convallis iaculis. Etiam eu felis sollicitudin, cursus mi vitae, iaculis magna. Nam non erat neque. In hac habitasse platea dictumst. Pellentesque molestie accumsan tellus id laoreet.',
+          phones: phone,
+          description,
         },
       })
 

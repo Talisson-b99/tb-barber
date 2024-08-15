@@ -13,6 +13,7 @@ interface CalendarComponentProps {
   handleChangeHourClick: (hour: string) => void
   date: Date | undefined
   setDate: (date: DateCalendar) => void
+  defaultHolidays?: Date[]
 }
 
 const CalendarComponent = ({
@@ -21,11 +22,18 @@ const CalendarComponent = ({
   handleChangeHourClick,
   date,
   setDate,
+  defaultHolidays,
 }: CalendarComponentProps) => {
   const { data } = useQuery({
     queryKey: ['hoursAvailable', barberId, date],
     queryFn: () => getHoursAvailable({ barbershopId: barberId, date: date! }),
   })
+
+  const holidayDates = defaultHolidays
+    ? defaultHolidays.map((holiday) => new Date(holiday))
+    : []
+
+  const disabledDays = [...holidayDates, { dayOfWeek: [0, 1] }]
 
   if (!data)
     return (
@@ -50,6 +58,7 @@ const CalendarComponent = ({
         className="flex justify-between"
         onSelect={setDate}
         fromDate={new Date()}
+        disabled={disabledDays}
       />
 
       <div className="mt-6 flex gap-2 overflow-x-scroll border-y py-6 [&::-webkit-scrollbar]:hidden">

@@ -2,13 +2,22 @@
 
 import { db } from '../lib/prisma'
 
-export async function searchdBarber(search: string) {
+export type SearchBarber =
+  | 'Cabelo'
+  | 'Barba'
+  | 'Acabamento'
+  | 'Sobrancelha'
+  | 'Massagem'
+
+export async function searchdBarber(search: SearchBarber) {
+  const searchParam = search === 'Acabamento' ? 'pézinho' : search
+
   const barber = await db.barbershop.findMany({
     where: {
       OR: [
         {
           name: {
-            contains: search,
+            contains: searchParam,
             mode: 'insensitive',
           },
         },
@@ -16,7 +25,7 @@ export async function searchdBarber(search: string) {
           services: {
             some: {
               name: {
-                contains: search,
+                contains: searchParam,
                 mode: 'insensitive',
               },
             },

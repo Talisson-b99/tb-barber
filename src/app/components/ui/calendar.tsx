@@ -17,6 +17,8 @@ function Calendar({
   showOutsideDays = true,
   ...props
 }: CalendarProps) {
+  // Função para desabilitar fins de semana
+
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}

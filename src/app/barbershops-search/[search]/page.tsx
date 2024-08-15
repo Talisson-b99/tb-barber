@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query'
 
-import { searchdBarber } from '@/app/actions/search-barber'
+import { SearchBarber, searchdBarber } from '@/app/actions/search-barber'
 import BabershopItem from '@/app/components/barbershop-item'
 import Header from '@/app/components/header'
 import SearchInput from '@/app/components/search-input'
@@ -10,7 +10,7 @@ import { Skeleton } from '@/app/components/ui/skeleton'
 
 interface BarbershopSearchPageProps {
   searchParams: {
-    q: string
+    q: SearchBarber
   }
 }
 
@@ -26,7 +26,7 @@ const BarbershopSearchPage = ({ searchParams }: BarbershopSearchPageProps) => {
         <div className="px-5">
           <Skeleton className="my-6 h-[40px] w-full rounded-xl" />
 
-          <div className="grid grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
             <Skeleton className="mt-6 h-[255px] min-w-[167px] rounded-2xl" />
             <Skeleton className="mt-6 h-[255px] min-w-[167px] rounded-2xl" />
             <Skeleton className="mt-6 h-[255px] min-w-[167px] rounded-2xl" />
