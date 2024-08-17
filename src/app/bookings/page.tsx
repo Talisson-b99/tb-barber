@@ -73,7 +73,7 @@ const BookingsPage = () => {
   )
 
   return (
-    <div>
+    <div className="relative">
       <Header />
 
       <div className="gap-x-8 px-5 pt-6 lg:grid lg:grid-cols-2">
@@ -86,11 +86,11 @@ const BookingsPage = () => {
               </h3>
               {bookingsConfirmed.map((booking) => (
                 <>
-                  <div className="lg:hidden">
+                  <div className="lg:hidden" key={booking.id}>
                     <BookingItem booking={booking} />
                   </div>
 
-                  <div className="hidden lg:block">
+                  <div className="hidden lg:block" key={booking.id}>
                     <CardBooking
                       booking={booking}
                       onclick={() => handleChangeBarber(booking)}
@@ -108,7 +108,7 @@ const BookingsPage = () => {
               </h3>
               {bookingsFinish.map((booking) => (
                 <>
-                  <div className="lg:hidden">
+                  <div className="lg:hidden" key={booking.id}>
                     <BookingItem booking={booking} />
                   </div>
 

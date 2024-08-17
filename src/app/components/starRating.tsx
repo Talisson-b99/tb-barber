@@ -11,7 +11,7 @@ import { DialogClose } from './ui/dialog'
 
 interface StarRatingProps {
   bookingId: string
-  setIsSheetOpen: (value: boolean) => void
+  setIsSheetOpen?: (value: boolean) => void
 }
 
 const StarRating = ({ bookingId, setIsSheetOpen }: StarRatingProps) => {
@@ -29,7 +29,7 @@ const StarRating = ({ bookingId, setIsSheetOpen }: StarRatingProps) => {
       toast.success('Avaliação realizada com sucesso', {
         id: 'evaluate-booking',
       })
-      setIsSheetOpen(true)
+      if (setIsSheetOpen) setIsSheetOpen(true)
       queryClient.invalidateQueries({
         queryKey: ['bookings'],
       })

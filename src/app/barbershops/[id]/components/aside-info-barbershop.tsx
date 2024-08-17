@@ -1,6 +1,7 @@
 'use client'
 
 import { Barbershop, BarbershopService, Booking } from '@prisma/client'
+import { DialogContent } from '@radix-ui/react-dialog'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
@@ -9,8 +10,10 @@ import Image from 'next/image'
 import { toast } from 'sonner'
 
 import { cancelBooking } from '@/app/actions/cancel-booking'
+import StarRating from '@/app/components/starRating'
 import { Button } from '@/app/components/ui/button'
 import { Card, CardContent } from '@/app/components/ui/card'
+import { Dialog, DialogTrigger } from '@/app/components/ui/dialog'
 
 import OperatingTable from './operating-table'
 
@@ -158,6 +161,36 @@ const AsideInfoBarbershop = ({
             >
               Cancelar reserva
             </Button>
+          </div>
+        )}
+
+        {booking?.status === 'COMPLETED' && (
+          <div className="pt-5">
+            <Dialog>
+              {booking.rating ? (
+                <Button className="w-full bg-green-600" variant={'ghost'}>
+                  Avaliação realizada
+                </Button>
+              ) : (
+                <DialogTrigger asChild>
+                  <Button variant="default" className="w-full">
+                    Avaliar Barbearia
+                  </Button>
+                </DialogTrigger>
+              )}
+
+              <DialogContent className="absolute -left-[50%] top-[50%] flex w-[60%] -translate-y-[50%] flex-col items-center rounded-lg bg-background px-3 py-8">
+                <span className="font-bold">Avalie sua experiência</span>
+                <span className="text-center text-sm text-muted-foreground">
+                  Toque nas estrelas para avaliar sua experiência na{' '}
+                  {barber.name}
+                </span>
+                <StarRating
+                  bookingId={booking.id}
+                  // setIsSheetOpen={setIsSheetOpen}
+                />
+              </DialogContent>
+            </Dialog>
           </div>
         )}
       </div>
