@@ -29,6 +29,7 @@ const CalendarComponent = ({
   const { data } = useQuery({
     queryKey: ['hoursAvailable', barberId, date],
     queryFn: () => getHoursAvailable({ barbershopId: barberId, date: date! }),
+    staleTime: 0,
   })
 
   const holidayDates = defaultHolidays

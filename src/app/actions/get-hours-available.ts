@@ -45,6 +45,8 @@ export async function getHoursAvailable({
   const hoursAvailable = barbershop.hoursAvailable.filter(
     (hour) => !bookedHours.includes(hour),
   )
+  console.log(bookedHours, 'horarios agendados')
+  console.log(hoursAvailable, 'horas disponivel')
 
   const hoursAvailableFuturre = hoursAvailable
     .map((hour) => {
@@ -55,8 +57,8 @@ export async function getHoursAvailable({
       return null
     })
     .filter((hour) => hour !== null)
-  console.log('função de  pegar horas disponiveis chamada')
-  console.log(hoursAvailableFuturre)
+
+  console.log(hoursAvailableFuturre, 'horas disponivel')
 
   return hoursAvailableFuturre
 }
