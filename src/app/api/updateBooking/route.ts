@@ -17,7 +17,7 @@ export async function GET() {
         status: 'COMPLETED',
       },
     })
-
+    console.log('Bookings updated')
     return NextResponse.json({ message: 'Bookings updated' })
   } catch (error) {
     return NextResponse.json({ message: 'Error updating bookings' })
