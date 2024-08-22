@@ -39,7 +39,12 @@ export async function getHoursAvailable({
     if (booking.status === 'CANCELED') {
       return null
     }
-    return format(new Date(booking.date), 'HH:mm')
+    const adjustedDate = new Date(
+      new Date(booking.date).getTime() - 3 * 60 * 60 * 1000,
+    )
+
+    // Retornar o horário formatado corretamente
+    return format(adjustedDate, 'HH:mm')
   })
 
   const hoursAvailable = barbershop.hoursAvailable.filter(
