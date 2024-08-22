@@ -55,6 +55,7 @@ export async function getHoursAvailable({
       return null
     })
     .filter((hour) => hour !== null)
+  console.log('função de  pegar horas disponiveis chamada')
 
   return hoursAvailableFuturre
 }
