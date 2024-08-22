@@ -1,6 +1,7 @@
 name: Schedule API Call
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '* * * * *' # Executa a cada minuto
 
